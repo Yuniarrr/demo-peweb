@@ -21,6 +21,7 @@
         @keyup.enter="TODO.editTask(item.id), (showEdit = false)"
       />
       <h4>{{ item.category.join(", ") }}</h4>
+      <button @click="TODO.deleteTask(item.id)">Delete</button>
     </div>
   </div>
 </template>

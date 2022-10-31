@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { initializeApp,  } from "firebase/app";
-import { getFirestore, collection, doc, setDoc, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDocs, onSnapshot, updateDoc, deleteDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAzBXzBWzXKxfR9K_aWAK_MEhlgKXh86-Q",
@@ -116,6 +116,10 @@ export const useTodo = defineStore({
           }
         });
       });
+    },
+    async deleteTask(id_task) {
+      let id = id_task;
+      await deleteDoc(doc(db, "todo_list", id.toString()));
     }
   },
 });
