@@ -48,7 +48,15 @@ export const useTodo = defineStore({
   actions: {
     async addNewTask() {
       let task = this.task;
-      let id = task.newTodo.length;
+      let id;
+      if(task.newTodo.length == 0) {
+        id = 0;
+      }
+      if (task.newTodo.length > 0) {
+        for(let i = 0; i < task.newTodo.length; i++) {
+          id = task.newTodo[i].id + 1;
+        }
+      }
       await setDoc(doc(db, "todo_list", id.toString()), {
         id: id,
         task: task.newTask,
