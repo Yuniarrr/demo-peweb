@@ -39,7 +39,10 @@ export const useTodo = defineStore({
     edit: {
       editTask: "",
       editCategory: [],
-    }
+    },
+    edu: [],
+    work: [],
+    shop: [],
   }),
   getters: {},
   actions: {
@@ -83,5 +86,36 @@ export const useTodo = defineStore({
         task: this.task.newTodo[id].task,
       });
     },
+
+    async getEducation(cat_name) {
+      let edu = this.edu;
+      await getDocs(collection(db, "todo_list")).then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().category.includes(cat_name)) {
+            edu.push(doc.data());
+          }
+        });
+      });
+    },
+    async getWork(cat_name) {
+      let work = this.work;
+      await getDocs(collection(db, "todo_list")).then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().category.includes(cat_name)) {
+            work.push(doc.data());
+          }
+        });
+      });
+    },
+    async getShop(cat_name) {
+      let shop = this.shop;
+      await getDocs(collection(db, "todo_list")).then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().category.includes(cat_name)) {
+            shop.push(doc.data());
+          }
+        });
+      });
+    }
   },
 });
